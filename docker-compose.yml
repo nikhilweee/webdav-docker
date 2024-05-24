@@ -1,0 +1,16 @@
+name: server
+
+services:
+  nginx:
+    container_name: server
+    image: server
+    restart: always
+    build: .
+    env_file:
+      - .env
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - '/mnt/storage/server/webdav:/var/www/webdav'
+      - '/mnt/storage/server/letsencrypt:/etc/letsencrypt'
