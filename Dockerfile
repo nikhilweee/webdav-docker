@@ -7,11 +7,9 @@ RUN apt update && \
     python3-certbot \
     python3-certbot-nginx
 
-COPY nginx.conf entrypoint.sh index.html /
+COPY nginx*.conf entrypoint.sh index.html /
 
 RUN chmod +x entrypoint.sh && \
-    mv nginx.conf /etc/nginx/nginx.conf && \
-    mv index.html /var/www/html && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
 
