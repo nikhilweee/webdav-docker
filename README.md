@@ -4,6 +4,11 @@ Easily setup an HTTPS enabled, nginx-based WebDAV server for Zotero using
 Docker. This project includes fetching TLS certificates using certbot, and
 extended support for WebDAV using the `nginx-dav-ext` module.
 
+> [!TIP] 
+> If you wish to set this up behind a reverse proxy such as Nginx Proxy
+> Manager, take a look at the 
+> [`npm`](https://github.com/nikhilweee/zotdav/tree/npm) branch.
+
 ## Setup WebDAV
 
 1.  Store credentials in a `.env` file.
@@ -22,11 +27,12 @@ extended support for WebDAV using the `nginx-dav-ext` module.
     services:
     # ...
     server:
-        # ...
-        volumes:
+      # ...
+      volumes:
         - "/path/to/webdav:/var/www/webdav"
         - "/path/to/letsencrypt:/etc/letsencrypt"
     ```
+
     Make sure `/path/to/webdav` and `/path/to/letsencrypt` exist on the host.
 
 3.  Run the service using docker compose.
