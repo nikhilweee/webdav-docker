@@ -5,9 +5,9 @@ Docker. This project includes fetching TLS certificates using certbot, and
 extended support for WebDAV using the `nginx-dav-ext` module.
 
 > [!TIP] 
-> If you wish to set this up behind a reverse proxy such as Nginx Proxy
-> Manager, take a look at the 
-> [`npm`](https://github.com/nikhilweee/zotdav/tree/npm) branch.
+> If you wish to set this up behind a reverse proxy such as [Nginx Proxy
+> Manager](https://github.com/NginxProxyManager/nginx-proxy-manager),
+> visit the [`npm`](https://github.com/nikhilweee/zotdav/tree/npm) branch.
 
 ## Setup WebDAV
 
