@@ -6,7 +6,13 @@ services:
     build: .
     env_file:
       - .env
-    ports:
-      - '8843:80'
+    # ports:
+    #   - '8843:8080'
     volumes:
       - '/mnt/storage/zotdav:/var/www/webdav'
+    networks:
+      - proxyman_default
+
+networks:
+  proxyman_default:
+    external: true

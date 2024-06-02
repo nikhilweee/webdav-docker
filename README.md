@@ -12,8 +12,6 @@ extended support for WebDAV using the `nginx-dav-ext` module.
     # .env
     WEBDAV_USER=username
     WEBDAV_PASS=password
-    CERTBOT_EMAIL=you@email.com
-    CERTBOT_DOMAIN=yourdomain.com
     ```
 
 2.  Configure mount paths on your host.
@@ -21,13 +19,13 @@ extended support for WebDAV using the `nginx-dav-ext` module.
     ```yaml
     services:
     # ...
-    server:
-        # ...
-        volumes:
+    zotdav:
+      # ...
+      volumes:
         - "/path/to/webdav:/var/www/webdav"
-        - "/path/to/letsencrypt:/etc/letsencrypt"
     ```
-    Make sure `/path/to/webdav` and `/path/to/letsencrypt` exist on the host.
+
+    Make sure `/path/to/webdav` exists on the host.
 
 3.  Run the service using docker compose.
 
@@ -36,6 +34,36 @@ extended support for WebDAV using the `nginx-dav-ext` module.
     ```
 
     To follow the logs, you can use `docker compose logs -f`
+
+## Setup Nginx Proxy Manager
+
+We shall use Nginx Proxy Manager (NPM) as a frontend for our WebDAV service. The
+biggest advantage is that NPM manages certificates for you. It also allows you
+to easlily setup multiple services on your server. We shall use the following
+steps to make sure that NPM and zotdav are on the same network. Assume NPM's
+default network is called `proxyman_default`.
+
+1.  Follow the setup instructions listed on NPM's
+    [website](https://nginxproxymanager.com/setup/)
+2.  Add `proxyman_default` to the networks section of the zotdav service.
+3.  Mark `proxyman_default` as an external network in the compose file.
+4.  Remove any ports that were previously exposed from the service.
+5.  On the NPM web interface, add a proxy host using `zotdav` as the forward
+    hostname and 8080 as the forward port.
+
+```
+services:
+  immich-server:
+    .....
+    # ports:
+    #   - 2283:3001
+    networks:
+      - proxyman_default
+
+networks:
+  proxyman_default:
+    external: true
+```
 
 ## Setup Zotero
 
