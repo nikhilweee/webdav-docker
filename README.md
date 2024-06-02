@@ -46,9 +46,10 @@ default network is called `proxyman_default`.
 1.  Follow the setup instructions listed on NPM's
     [website](https://nginxproxymanager.com/setup/)
 2.  Add `proxyman_default` to the networks section of the zotdav service.
-3.  Mark `proxyman_default` as an external network in the compose file.
-4.  Remove any ports that were previously exposed from the service.
-5.  On the NPM web interface, add a proxy host using `zotdav` as the forward
+3.  You may also need to add a `default` network along with `proxyman_default`.
+4.  Mark `proxyman_default` as an external network in the compose file.
+5.  Remove any ports that were previously exposed from the service.
+6.  On the NPM web interface, add a proxy host using `zotdav` as the forward
     hostname and 8080 as the forward port.
 
 ```
